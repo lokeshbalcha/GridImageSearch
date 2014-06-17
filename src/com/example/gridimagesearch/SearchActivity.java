@@ -11,6 +11,9 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -23,6 +26,7 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 public class SearchActivity extends Activity {
+	
 	EditText etQuery;
 	GridView gvResults;
 	Button btnSearch;
@@ -55,7 +59,20 @@ public class SearchActivity extends Activity {
 				  
 				});
 			}
-
+		@Override 
+		public boolean onCreateOptionsMenu(Menu menu) {
+		  MenuInflater inflater = getMenuInflater();
+		  inflater.inflate(R.menu.search_menu, menu);
+		  return true;
+		}
+	    
+		public void onChangeSearchSettings(MenuItem item) {
+		    Intent i = new Intent(getApplicationContext(), SearchFilterActivity.class);
+		    
+		    startActivity(i);
+			}
+	
+	
 
 	private void setupViews() {
 		// TODO Auto-generated method stub

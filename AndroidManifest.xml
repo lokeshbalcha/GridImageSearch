@@ -28,6 +28,10 @@
             android:name="com.example.gridimagesearch.ImageDisplayActivity"
             android:label="@string/title_activity_image_display" >
         </activity>
+        <activity
+            android:name="com.example.gridimagesearch.SearchFilterActivity"
+            android:label="@string/title_activity_search_filter" >
+        </activity>
     </application>
 
 </manifest>
