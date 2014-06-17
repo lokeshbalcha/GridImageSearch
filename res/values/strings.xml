@@ -8,5 +8,10 @@
     <string name="title_activity_image_display">ImageDisplayActivity</string>
     <string name="action_settings">action settings</string>
     <string name="title_activity_search_filter">SearchFilterActivity</string>
-
+	<string name="color_filter">Image Color</string>
+	<string name="search_option">~~~~!!Search Options!!~~~~</string>
+	<string name="image_size">Image size</string>
+	<string name="image_type">Image Type</string>
+	<string name="site_filter">From Site</string>
+	<string name="go_search">Search Now</string>
 </resources>
