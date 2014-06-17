@@ -6,6 +6,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.os.Parcel;
+
 	
 	public class ImageResult {
 		private String fullUrl;
@@ -43,4 +45,13 @@ import org.json.JSONObject;
 			}
 			return results;
 		}
+		  public int describeContents() {
+		    // TODO Auto-generated method stub
+		    return 0;
+		  }
+
+		  public void writeToParcel(Parcel dest, int flags) {
+		    dest.writeString(fullUrl);
+		    dest.writeString(thumbUrl);
+	}
 	}

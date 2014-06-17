@@ -27,6 +27,8 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 
 public class SearchActivity extends Activity {
 	
+	SearchFilter searchFilter = new SearchFilter("", "", "", "");
+	public static final int CHANGE_FILTER = 1;
 	EditText etQuery;
 	GridView gvResults;
 	Button btnSearch;
@@ -68,8 +70,8 @@ public class SearchActivity extends Activity {
 	    
 		public void onChangeSearchSettings(MenuItem item) {
 		    Intent i = new Intent(getApplicationContext(), SearchFilterActivity.class);
-		    
-		    startActivity(i);
+		    i.putExtra("filter", searchFilter);
+		    startActivityForResult(i, CHANGE_FILTER);
 			}
 	
 	
@@ -94,7 +96,7 @@ public class SearchActivity extends Activity {
 	    Toast.makeText(this, "Searching for : " + query, Toast.LENGTH_SHORT).show();
 	    Log.d("DEBUG", String.valueOf(offset));
 	    AsyncHttpClient client = new AsyncHttpClient();
-	client.get("https://ajax.googleapis.com/ajax/services/search/images?rsz=8&v=1.0&start="+offset+"&q="+Uri.encode(query),
+	client.get("https://ajax.googleapis.com/ajax/services/search/images?rsz=8&v=1.0&start="+offset+ searchFilter.toParamString() +"&q="+Uri.encode(query),
 					new JsonHttpResponseHandler() {
 	    @Override
 	    public void onSuccess(JSONObject response) {
@@ -105,7 +107,6 @@ public class SearchActivity extends Activity {
 	          imageResults.clear();
 	        }
 	        imageAdapter.addAll(ImageResult.fromJSONArray(imageJsonResult));
-	        // imageAdapter.notify();
 	 //       Log.d("DEBUG", imageResults.toString());
 	      } catch (JSONException e) {
 	        e.printStackTrace();
@@ -113,4 +114,10 @@ public class SearchActivity extends Activity {
 	    }
 	  });   
 	}
+		 @Override
+		   protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		     if (resultCode == RESULT_OK && requestCode == CHANGE_FILTER) {
+		       searchFilter = data.getParcelableExtra("saved_filter");
+		     }
+		   }
 }
